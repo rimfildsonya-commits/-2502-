@@ -61,7 +61,7 @@ def test_len():
 def test_addrec1():
     recipe1 = Recipe("AAA", [Ingredient("m", 888, "мг")])
     list1 = ShoppingList()
-    list1.add(recipe1, 1)
+    list1.add_recipe(recipe1, 1)
     assert list1.items[0][0].quantity == 888
 def test_addrec2():
     recipe1 = Recipe("BBB", [Ingredient("xzzz", 677, "г")])
@@ -92,9 +92,9 @@ def test_getlist2():
     list1 = ShoppingList()
     list1.add_recipe(Recipe("tort", [Ingredient("morkovka", 1488, "кг"), Ingredient("listok", 18, "кг"), Ingredient("chh", 777, "г")]), 1 )
     list2 = list1.get_list()
-    assert list2[0].name == "morkovka"
+    assert list2[0].name == "chh"
     assert list2[1].name == "listok"
-    assert list2[2].name == "chh"
+    assert list2[2].name == "morkovka"
 def test_add():
     list1 = ShoppingList()
     list1.add_recipe(Recipe("A", [Ingredient("C", 67, "мг")]), 1)   
