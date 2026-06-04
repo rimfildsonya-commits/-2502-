@@ -3,7 +3,6 @@ from recipes import Recipe
 from dietary_recipes import DietaryRecipe
 from shopping_list import ShoppingList
 import pytest
-@pytest
 def create():
     ing1 = Ingredient("QQQ", 67, "мг")
     assert ing1.name == "QQQ"
@@ -62,8 +61,8 @@ def test_len():
 def test_addrec1():
     recipe1 = Recipe("AAA", [Ingredient("m", 888, "мг")])
     list1 = ShoppingList()
-    list.add(recipe1, 1)
-    assert список.items[0][0].quantity == 888
+    list1.add(recipe1, 1)
+    assert list1.items[0][0].quantity == 888
 def test_addrec2():
     recipe1 = Recipe("BBB", [Ingredient("xzzz", 677, "г")])
     list1 = ShoppingList()
