@@ -1,21 +1,25 @@
-class Ingredient:
-    def __init__(self, name, quantity, unit):
-        self.name = name
-        self.quanity = quantity
-        self.unit = unit
-    @property
-    def quantity(self):
-        return self._quantity
-    @quantity.setter
-    def quantity(self, value):
-        if value <= 0:
-            raise ValueError(
-                "Количество должно быть положительным"
-                )
-        self._quantity = float(value)
+from ingredients import Ingredient
+class Recipe:
+    def __init__(self, title, ingredients):
+        self.title = title
+        self.ingredients = ingredients
+    def add_ingredient(self, ingredient: Ingredient):
+        for x in self.ingredients:
+            if x.name == ingredient.name and x.unit == ingredient.unit:
+                x.quantity += ingredient.quantity
+                return
+        self.ingredients.append(ingredient)
+    @staticmethod
+    def is_valid_ratio(ratio):
+        return isinstance(ratio, (int, float)) and ratio > 0
+    def scale(self, ratio: float):
+        if not self.is_valid_ratio(ratio):
+            raise ValueError("Коэффициент должен быть положительным числом")
+        new_ingredients = []
+        for x in self.ingredients:
+            new_ingredients.append(Ingredient(x.name, x.quantity * ratio, x.unit))
+        return Recipe(self.title, new_ingredients)
+    def __len__(self):
+        return len(self.ingredients)
     def __str__(self):
-        return f"{self.name}: {self.quantity} {self.unit}"
-    def __repr__(self):
-        return f"Ingredient('{self.name}', {self.quantity}, '{self.unit}')"
-    def __eq__(self, other):
-        return self.name == other.name and self.unit == other.unitы
+        return f"{self.title}: {self.ingredients}"
